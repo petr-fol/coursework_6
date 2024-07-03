@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .card-img {
+        width: 100%; /* Устанавливаем ширину изображения на 100% от родительского контейнера (карточки) */
+        height: 400px; /* Устанавливаем фиксированную высоту изображения */
+        object-fit: cover; /* Подгоняем изображение под размеры контейнера с сохранением пропорций */
+    }
+
+</style>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">{{email.title}}</h1>
+                    <p class="card-text">{{email.description}}</p>
+                    <a href="{% url 'email_list' %}">
+                        <button class="btn btn-dark"> Вернуться</button>
+                    </a>
+                    {% if perms.emails.delete_email or user == email.owner or user.is_superuser %}
+                    <a href="{% url 'email_confirm_delete' pk=email.pk %}">
+                        <button class="btn btn-danger float-right ml-2">Удалить &#128465;</button>
+                    </a>
+                    {% endif %}
+                    {% if perms.emails.can_edit_category or user == email.owner or user.is_superuser %}
+                    <a href="{% url 'email_form' slug=email.slug %}">
+                        <button class="btn btn-dark float-right">Редактировать &#9998;</button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
