@@ -14,18 +14,18 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">{{email.title}}</h1>
-                    <p class="card-text">{{email.description}}</p>
-                    <a href="{% url 'email_list' %}">
+                    <h1 class="card-title">{{message.title}}</h1>
+                    <p class="card-text">{{message.description}}</p>
+                    <a href="{% url 'message_list' %}">
                         <button class="btn btn-dark"> Вернуться</button>
                     </a>
-                    {% if perms.emails.delete_email or user == email.owner or user.is_superuser %}
-                    <a href="{% url 'email_confirm_delete' pk=email.pk %}">
+                    {% if perms.messages.delete_message or user == message.owner or user.is_superuser %}
+                    <a href="{% url 'message_confirm_delete' pk=message.pk %}">
                         <button class="btn btn-danger float-right ml-2">Удалить &#128465;</button>
                     </a>
                     {% endif %}
-                    {% if perms.emails.can_edit_email or user == email.owner or user.is_superuser %}
-                    <a href="{% url 'email_form' slug=email.slug %}">
+                    {% if perms.messages.can_edit_message or user == message.owner or user.is_superuser %}
+                    <a href="{% url 'message_form' slug=message.slug %}">
                         <button class="btn btn-dark float-right">Редактировать &#9998;</button>
                     </a>
                     {% endif %}

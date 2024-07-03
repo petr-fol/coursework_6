@@ -5,7 +5,8 @@ from django.views.generic import TemplateView
 from users.apps import UsersConfig
 from users.views import UserCreateView, UserUpdateView, email_verification, reset_password
 
-app_name = UsersConfig.name
+app_name = 'users'
+# app_name = 'users'
 
 urlpatterns = [
     path('', LoginView.as_view(template_name='users/login.html'), name='login'),

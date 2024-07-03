@@ -1,23 +1,22 @@
-from django.db import models
 import itertools
 
 from django.db import models
 from slugify import slugify
-
 
 # Create your models here.
 NULLABLE = {'null': True, 'blank': True}
 
 
 class Email(models.Model):
-    title = models.CharField(max_length=150, verbose_name='тема письма', help_text='напишите тему письма')
-    description = models.TextField(verbose_name='тело письма', help_text='напишите письмо', **NULLABLE)
-    recipients_list = models.ManyToManyField('emails.Client', verbose_name='получатели',
-                                             help_text='напишите получатели')
+    # message = models.ForeignKey('emails.Message', on_delete=models.CASCADE, verbose_name='письмо')
+    recipient_list = models.ManyToManyField('clients.Client', verbose_name='получатели',
+                                            help_text='выберите получателей', related_name='email_recipients')
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
-    message = models.ForeignKey('emails.Message', on_delete=models.CASCADE, verbose_name='письмо',
-                                help_text='выберите письмо')
-    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец')
+
+    # message = models.ForeignKey('emails.Message', on_delete=models.CASCADE, verbose_name='письмо',
+    #                             help_text='выберите письмо')
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец',
+                              related_name='email_owner')
 
     class Meta:
         verbose_name = 'рассылка'

@@ -67,7 +67,7 @@
                     <a href="{% url 'email_form' slug=email.slug %}"
                        class="btn btn-dark btn-sm">&#9998;</a>
                     {% endif %}
-                                        {% if perms.emails.can_edit_email or user == email.owner or user.is_superuser %}
+                    {% if perms.emails.delete_email or user == email.owner or user.is_superuser %}
                     <a href="{% url 'email_confirm_delete' pk=email.pk %}"
                        class="btn btn-danger btn-sm">&#128465;</a>
                     {% endif %}

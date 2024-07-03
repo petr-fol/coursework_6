@@ -9,7 +9,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class Client(models.Model):
-    email = models.EmailField(max_length=150, verbose_name='почта', help_text='напишите почту')
+    email_client = models.EmailField(max_length=150, verbose_name='почта', help_text='напишите почту')
     name = models.CharField(max_length=150, verbose_name='ФИО', help_text='напишите ФИО')
     comment = models.TextField(verbose_name='комментарии', help_text='напишите комментарий', **NULLABLE)
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
@@ -28,7 +28,7 @@ class Client(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name, self.email}"
+        return f"{self.name, self.email_client}"
 
 
 # class Subject(models.Model):
