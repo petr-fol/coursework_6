@@ -3,20 +3,20 @@ import itertools
 from django.db import models
 from slugify import slugify
 
+from emails_messages.models import EmailMessage
+
 # Create your models here.
 NULLABLE = {'null': True, 'blank': True}
 
 
 class Email(models.Model):
-    # message = models.ForeignKey('emails.Message', on_delete=models.CASCADE, verbose_name='письмо')
+    message = models.ForeignKey(EmailMessage, on_delete=models.CASCADE, verbose_name='письмо', default=None)
     recipient_list = models.ManyToManyField('clients.Client', verbose_name='получатели',
                                             help_text='выберите получателей', related_name='email_recipients')
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
 
-    # message = models.ForeignKey('emails.Message', on_delete=models.CASCADE, verbose_name='письмо',
-    #                             help_text='выберите письмо')
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец',
-                              related_name='email_owner')
+                              related_name='email_owner', **NULLABLE)
 
     class Meta:
         verbose_name = 'рассылка'

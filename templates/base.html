@@ -103,7 +103,12 @@
 <div class="header">
     <div class="container">
         <div class="header-buttons">
+            {% if user.is_authenticated %}
             <a href="{% url 'email_list' %}" class="btn">Рассылки</a>
+            <a href="{% url 'message_list' %}" class="btn">блог</a>
+            <a href="{% url 'client_list' %}" class="btn">клиенты</a>
+            <a href="{% url 'email_message_list' %}" class="btn">Письма</a>
+            {% endif %}
             {% if user.is_authenticated and user.is_staff %}
             <a href="/admin/" class="btn">Админка</a>
             {% endif %}
@@ -131,8 +136,9 @@
     <div class="dropdown-menu">
         {% if user.is_authenticated %}
         <a href="{% url 'email_create' %}" class="dropdown-item">Рассылку</a>
-        <a href="{% url 'message_create' %}" class="dropdown-item">Сообщение</a>
-        {% if perms.students.add_сlient %} // Проверка на разрешение добавления клиента
+        <a href="{% url 'message_create' %}" class="dropdown-item">Пост</a>
+        <a href="{% url 'email_message_create' %}" class="dropdown-item">Письмо</a>
+        {% if perms.students.add_сlient %}
         <a href="{% url 'client_create' %}" class="dropdown-item">Клиента</a>
         {% endif %}
         {% endif %}

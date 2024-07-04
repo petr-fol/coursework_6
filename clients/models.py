@@ -13,6 +13,8 @@ class Client(models.Model):
     name = models.CharField(max_length=150, verbose_name='ФИО', help_text='напишите ФИО')
     comment = models.TextField(verbose_name='комментарии', help_text='напишите комментарий', **NULLABLE)
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец',
+                              related_name='client_owner', **NULLABLE)
 
     class Meta:
         verbose_name = 'клиент'

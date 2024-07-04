@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'users',
     'emails',
     'clients',
-    'blog.apps.BlogConfig',
+    'blog',
+    'emails_messages.apps.EmailMessagesConfig',
 ]
 
 MIDDLEWARE = [

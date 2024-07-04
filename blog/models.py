@@ -2,7 +2,7 @@ import itertools
 
 from django.db import models
 from slugify import slugify
-
+NULLABLE = {'null': True, 'blank': True}
 
 # Create your models here.
 class Message(models.Model):
@@ -14,7 +14,9 @@ class Message(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     views = models.IntegerField(default=0, verbose_name='Количество просмотров')
-    # author = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Автор')
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец',
+                              related_name='message_owner', **NULLABLE)
+
 
     class Meta:
         verbose_name = 'Сообщение'

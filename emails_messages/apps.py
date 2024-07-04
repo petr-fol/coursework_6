@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class MessagesConfig(AppConfig):
+class EmailMessagesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'messages'
+    name = 'emails_messages'
 

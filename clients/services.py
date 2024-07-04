@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.cache import cache
 
-from clients.models import Subject
 
 
 def cached_subjects_for_client(client_pk):
