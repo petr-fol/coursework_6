@@ -4,7 +4,7 @@ from django.db import models
 from slugify import slugify
 NULLABLE = {'null': True, 'blank': True}
 
-# Create your models here.
+
 class Message(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
     slug = models.SlugField(max_length=200, verbose_name='Ссылка', unique=True)   # потом сделать через чарфилд
@@ -16,7 +16,6 @@ class Message(models.Model):
     views = models.IntegerField(default=0, verbose_name='Количество просмотров')
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='владелец',
                               related_name='message_owner', **NULLABLE)
-
 
     class Meta:
         verbose_name = 'Сообщение'

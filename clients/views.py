@@ -1,13 +1,10 @@
-from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
-from django.core.cache import cache
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from clients.forms import ClientForm
 from clients.models import Client
-from clients.services import cached_subjects_for_client
 
 
 # Create your views here.
@@ -44,12 +41,6 @@ class ClientUpdateView(LoginRequiredMixin,  UpdateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        SubjectFormset = inlineformset_factory(Client, Subject, form=SubjectForm, extra=1)
-        if self.request.method == 'POST':
-            context_data['formset'] = SubjectFormset(self.request.POST, instance=self.object)
-        else:
-            context_data['formset'] = SubjectFormset(instance=self.object)
-
         return context_data
 
     def get_success_url(self):

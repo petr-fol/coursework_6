@@ -97,6 +97,45 @@
             justify-content: flex-end; /* Выравнивание по правому краю */
         }
 
+        /* Зеленые кнопки: добавить, профиль, регистрация */
+        .fixed-button,
+        .header .btn[href*="profile"],
+        .header .btn[href*="register"] {
+            background-color: rgba(144, 238, 144, 0.5); /* Блекло-зеленый */
+        }
+
+        .fixed-button:hover,
+        .header .btn[href*="profile"]:hover,
+        .header .btn[href*="register"]:hover {
+            background-color: rgba(144, 238, 144, 0.7);
+        }
+
+        /* Желтая кнопка: админка */
+        .header .btn[href="/admin/"] {
+            background-color: rgba(255, 255, 224, 0.5); /* Блекло-желтый */
+        }
+
+        .header .btn[href="/admin/"]:hover {
+            background-color: rgba(255, 255, 224, 0.7);
+        }
+
+        /* Красная кнопка: выйти */
+        .header .btn[type="submit"] {
+            background-color: rgba(255, 182, 193, 0.5); /* Блекло-красный */
+        }
+
+        .header .btn[type="submit"]:hover {
+            background-color: rgba(255, 182, 193, 0.7);
+        }
+
+        /* Голубые кнопки: остальные */
+        .header .btn {
+            background-color: rgba(173, 216, 230, 0.5); /* Блекло-голубой */
+        }
+
+        .header .btn:hover {
+            background-color: rgba(173, 216, 230, 0.7);
+        }
     </style>
 </head>
 <body>
@@ -107,7 +146,7 @@
             <a href="{% url 'email_list' %}" class="btn">Рассылки</a>
             <a href="{% url 'message_list' %}" class="btn">блог</a>
             <a href="{% url 'client_list' %}" class="btn">клиенты</a>
-            <a href="{% url 'email_message_list' %}" class="btn">Письма</a>
+            <a href="{% url 'email_message_list' %}" class="btn">письма</a>
             {% endif %}
             {% if user.is_authenticated and user.is_staff %}
             <a href="/admin/" class="btn">Админка</a>

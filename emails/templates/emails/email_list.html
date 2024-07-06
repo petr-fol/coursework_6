@@ -18,25 +18,12 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Более выразительная тень при наведении */
     }
 
-    /* Стили для изображений в карточке */
-    .card-img-top {
-        border-top-left-radius: 10px; /* Скругление верхнего левого угла изображения */
-        border-top-right-radius: 10px; /* Скругление верхнего правого угла изображения */
-        object-fit: cover; /* Изображение заполняет всю площадь, сохраняя пропорции */
-        height: 200px; /* Фиксированная высота изображения */
-    }
-
     /* Стили для заголовка карточки */
     .card-title {
         color: #333333; /* Цвет текста заголовка */
         font-weight: bold; /* Жирный шрифт */
-    }
-
-    /* Стили для цены карточки */
-    .card-price {
-        color: #007bff; /* Цвет текста цены */
-        font-size: 20px; /* Размер текста цены */
-        font-weight: bold; /* Жирный шрифт */
+        margin-top: 10px; /* Добавляем верхний отступ */
+        margin-left: 20px; /* Добавляем отступ слева */
     }
 
     /* Скрытие кнопок "Редактировать" и "Удалить" по умолчанию */
@@ -53,21 +40,50 @@
     }
 
 </style>
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>Общая статистика</h2>
+        <p>Всего рассылок: {{ total_mailings }}</p>
+        <p>Активных рассылок: {{ active_mailings }}</p>
+        <p>Уникальных клиентов: {{ unique_clients }}</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>Случайные статьи из блога</h2>
+    </div>
+    {% for message in random_articles %}
+    <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ message.title }}</h5>
+                <p class="card-text">{{ message.description|truncatewords:30 }}</p>
+                <a href="{% url 'message_detail' slug=message.slug %}" class="btn btn-primary btn-sm">Читать далее</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 <div class="row">
+        <div class="col-12">
+        <h2>Ваши рассылки</h2>
+    </div>
     {% for email in emails %}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card">
-            <a href="{% url 'email_detail' slug=email.slug %}">
+            <a href="{% url 'email_detail' pk=email.pk %}">
                 <h4 class="card-title">{{ email.title }}</h4>
             </a>
             <div class="card-body">
                 <p class="card-text">{{ email.description|truncatechars:88 }}</p>
                 <div class="btn-group">
                     {% if perms.emails.can_edit_email or user == email.owner or user.is_superuser %}
-                    <a href="{% url 'email_form' slug=email.slug %}"
+                    <a href="{% url 'email_form' pk=email.pk %}"
                        class="btn btn-dark btn-sm">&#9998;</a>
                     {% endif %}
-                                        {% if perms.emails.can_edit_email or user == email.owner or user.is_superuser %}
+                    {% if perms.emails.can_edit_email or user == email.owner or user.is_superuser %}
                     <a href="{% url 'email_confirm_delete' pk=email.pk %}"
                        class="btn btn-danger btn-sm">&#128465;</a>
                     {% endif %}

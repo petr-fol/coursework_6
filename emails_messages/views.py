@@ -15,25 +15,23 @@ class EmailMessageCreateView(CreateView):
 
 class EmailMessageListView(ListView):
     model = EmailMessage
-    context_object_name = 'email_message_list'
+    context_object_name = 'emails_messages'
 
 
 class EmailMessageDetailView(DetailView):
     model = EmailMessage
-    context_object_name = 'email_message_detail'
+    context_object_name = 'email_message'
 
 
 class EmailMessageUpdateView(UpdateView):
     model = EmailMessage
     form_class = EmailMessageForm
-    context_object_name = 'email_message_update'
     success_url = reverse_lazy('email_message_detail')
 
 
 class EmailMessageDeleteView(DeleteView):
     model = EmailMessage
     form_class = EmailMessageForm
-    context_object_name = 'email_message_delete'
     success_url = reverse_lazy('email_message_detail')
 
 

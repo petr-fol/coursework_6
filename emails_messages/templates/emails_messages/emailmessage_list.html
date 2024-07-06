@@ -30,6 +30,8 @@
     .card-title {
         color: #333333; /* Цвет текста заголовка */
         font-weight: bold; /* Жирный шрифт */
+        margin-top: 10px; /* Добавляем верхний отступ */
+        margin-left: 20px; /* Добавляем отступ слева */
     }
 
     /* Стили для цены карточки */
@@ -54,21 +56,21 @@
 
 </style>
 <div class="row">
-    {% for email in emails %}
+    {% for email_message in emails_messages %}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card">
-            <a href="{% url 'email_detail' slug=email.slug %}">
+            <a href="{% url 'email_message_detail' pk=email_message.pk %}">
                 <h4 class="card-title">{{ email_message.title }}</h4>
             </a>
             <div class="card-body">
-                <p class="card-text">{{ email.description|truncatechars:88 }}</p>
+                <p class="card-text">{{ email_message.description|truncatechars:88 }}</p>
                 <div class="btn-group">
-                    {% if perms.emails_messages.can_edit_email_message or user == email.owner or user.is_superuser %}
-                    <a href="{% url 'email_form' slug=email.slug %}"
+                    {% if perms.emails_messages.can_edit_email_message or user == emails_messages.owner or user.is_superuser %}
+                    <a href="{% url 'email_message_form' pk=email_message.pk %}"
                        class="btn btn-dark btn-sm">&#9998;</a>
                     {% endif %}
-                    {% if perms.emails.delete_email or user == email.owner or user.is_superuser %}
-                    <a href="{% url 'email_confirm_delete' pk=email.pk %}"
+                    {% if perms.emails_messages.delete_emails_messages or user == emails_messages.owner or user.is_superuser %}
+                    <a href="{% url 'email_message_confirm_delete' pk=email_message.pk %}"
                        class="btn btn-danger btn-sm">&#128465;</a>
                     {% endif %}
                 </div>

@@ -9,11 +9,4 @@ class ClientForm(StyleFormMixin, forms.ModelForm):
         model = Client
         fields = '__all__'
         # исключение полей ниже
-        exclude = ['slug']
-
-
-
-# class SubjectForm(StyleFormMixin, forms.ModelForm):
-#     class Meta:
-#         model = Subject
-#         fields = ['title', 'description',]  # 'student'
+        exclude = ['slug', 'owner']
