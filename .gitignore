@@ -164,3 +164,8 @@ cython_debug/
 .idea/workspace.xml
 
 users/migrations
+blog/migrations
+clients/migrations
+emails/migrations
+emails_messages/migrations
+media/
